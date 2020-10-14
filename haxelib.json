@@ -1,0 +1,10 @@
+{
+	"name": "extension-appleid",
+	"url": "https://github.com/charmdev/extension-appleid",
+	"license": "MIT",
+	"tags": ["auth", "AppleID", "iOS"],
+	"description": "Sign In With Apple extension for iOS.",
+	"version": "1.0.0",
+	"contributors": ["charmdev"],
+	"releasenote": ""
+}
