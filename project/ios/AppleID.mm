@@ -1,14 +1,12 @@
-#import <AppleIDCallbacksDelegate.h>
 #import <AppleID.h>
+#import <AppleIDCallbacksDelegate.h>
 #import <AuthenticationServices/AuthenticationServices.h>
 
 namespace extension_appleid {
 
 	AppleIDCallbacksDelegate *callbacks;
-	UIViewController *root;
 
 	void init() {
-		root = [[[UIApplication sharedApplication] keyWindow] rootViewController];
 		callbacks = [[AppleIDCallbacksDelegate alloc] init];
 	}
 

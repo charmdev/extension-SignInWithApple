@@ -8,8 +8,7 @@ namespace extension_appleid {
 	void login();
 	void init();
 	bool available();
-
-	void onLoginSuccessCallback(const char *userId, const char *email, const char *firstName, const char *lastName);
+	void onLoginSuccessCallback(const char *userId, const char *email, const char *firstName, const char *lastName, const char *token);
 	void onLoginFailedCallback();
 	void onLoginErrorCallback(const char *error);
 }

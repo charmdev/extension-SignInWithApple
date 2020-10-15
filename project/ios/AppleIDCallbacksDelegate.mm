@@ -15,18 +15,44 @@
 	
 	if ([authorization.credential isKindOfClass:[ASAuthorizationAppleIDCredential class]]) {
 		ASAuthorizationAppleIDCredential *appleIDCredential = authorization.credential;
+
+		NSString* user_ = @"";
+		NSString* email_ = @"";
+		NSString* givenName_ = @"";
+		NSString* familyName_ = @"";
+		NSString* identityToken_ = @"";
+
+		if (appleIDCredential.user) {
+			user_ = appleIDCredential.user;
+		}
+		if (appleIDCredential.email) {
+			email_ = appleIDCredential.email;
+		}
+		if (appleIDCredential.fullName.givenName) {
+			givenName_ = appleIDCredential.fullName.givenName;
+		}
+		if (appleIDCredential.fullName.familyName) {
+			familyName_ = appleIDCredential.fullName.familyName;
+		}
+		if ([appleIDCredential identityToken]) {
+			NSData *tokenData = [appleIDCredential identityToken];
+			auto token = [[NSString alloc] initWithData:tokenData encoding:NSUTF8StringEncoding];
+			identityToken_ = token;
+		}
+
 		extension_appleid::onLoginSuccessCallback(
-			[appleIDCredential.user UTF8String],
-			[appleIDCredential.email UTF8String],
-			[appleIDCredential.fullName.givenName UTF8String],
-			[appleIDCredential.fullName.familyName UTF8String]);
-		
-	} else {
+			[user_ UTF8String],
+			[email_ UTF8String],
+			[givenName_ UTF8String],
+			[familyName_ UTF8String],
+			[identityToken_ UTF8String]
+		);
+	}
+	else {
 		extension_appleid::onLoginFailedCallback();
 	}
 }
  
-
  - (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error API_AVAILABLE(ios(13.0)) {
 	
 	NSLog(@"%s", __FUNCTION__);

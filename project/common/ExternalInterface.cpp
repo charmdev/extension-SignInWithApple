@@ -25,15 +25,16 @@ AutoGCRoot* _onAppleIDLoginSuccessCallback;
 AutoGCRoot* _onAppleIDLoginFailedCallback;
 AutoGCRoot* _onAppleIDLoginErrorCallback;
 
-void extension_appleid::onLoginSuccessCallback(const char *userId, const char *email, const char *firstName, const char *lastName) {
-	value args[4] = {
+void extension_appleid::onLoginSuccessCallback(const char *userId, const char *email, const char *firstName, const char *lastName, const char *token) {
+	value args[5] = {
 		safe_alloc_string(userId),
 		safe_alloc_string(email),
 		safe_alloc_string(firstName),
-		safe_alloc_string(lastName)
+		safe_alloc_string(lastName),
+		safe_alloc_string(token)
 	};
 
-	safe_val_callN(_onAppleIDLoginSuccessCallback, args, 4);
+	safe_val_callN(_onAppleIDLoginSuccessCallback, args, 5);
 }
 
 void extension_appleid::onLoginFailedCallback() {

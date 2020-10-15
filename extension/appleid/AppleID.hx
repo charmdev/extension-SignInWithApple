@@ -5,11 +5,7 @@ import extension.util.task.*;
 
 class AppleID extends TaskExecutor {
 
-	static var initted = false;
-	public var userId:String;
-	public var email:String;
-	public var firstName:String;
-	public var lastName:String;
+	static var initted:Bool = false;
 
 	private static var instance: AppleID = null;
 
@@ -28,12 +24,12 @@ class AppleID extends TaskExecutor {
 	}
 
 	public function login(
-		onComplete:String->String->String->String->Void,
+		onComplete:String->String->String->String->String->Void,
 		onFailed:Void->Void,
 		onError:String->Void
 	) {
-		var fOnComplete = function(userId, email, firstName, lastName) {
-			addTask(new CallStr4Task(onComplete, userId, email, firstName, lastName));
+		var fOnComplete = function(userId, email, firstName, lastName, token) {
+			addTask(new CallStr5Task(onComplete, userId, email, firstName, lastName, token));
 		}
 
 		var fOnFailed = function() {
