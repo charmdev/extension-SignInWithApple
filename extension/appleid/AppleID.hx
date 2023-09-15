@@ -24,12 +24,12 @@ class AppleID extends TaskExecutor {
 	}
 
 	public function login(
-		onComplete:String->String->String->String->String->Void,
+		onComplete:String->String->String->String->String->String->Void,
 		onFailed:Void->Void,
 		onError:String->Void
 	) {
-		var fOnComplete = function(userId, email, firstName, lastName, token) {
-			addTask(new CallStr5Task(onComplete, userId, email, firstName, lastName, token));
+		var fOnComplete = function(userId, email, firstName, lastName, token, code) {
+			addTask(new CallStr6Task(onComplete, userId, email, firstName, lastName, token, code));
 		}
 
 		var fOnFailed = function() {
