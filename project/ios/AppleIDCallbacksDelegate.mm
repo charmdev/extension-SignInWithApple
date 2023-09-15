@@ -21,6 +21,7 @@
 		NSString* givenName_ = @"";
 		NSString* familyName_ = @"";
 		NSString* identityToken_ = @"";
+		NSString* code_ = @"";
 
 		if (appleIDCredential.user) {
 			user_ = appleIDCredential.user;
@@ -40,12 +41,19 @@
 			identityToken_ = token;
 		}
 
+		if ([appleIDCredential authorizationCode]) {
+            NSData *data = [appleIDCredential authorizationCode];
+            auto code = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            code_ = code;
+        }
+
 		extension_appleid::onLoginSuccessCallback(
 			[user_ UTF8String],
 			[email_ UTF8String],
 			[givenName_ UTF8String],
 			[familyName_ UTF8String],
-			[identityToken_ UTF8String]
+			[identityToken_ UTF8String],
+			[code_ UTF8String]
 		);
 	}
 	else {
